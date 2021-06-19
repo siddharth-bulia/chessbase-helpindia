@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>ChessBase Foundations</title>
+      <!-- SEO Meta Tags-->
+      <meta name="description" content="ChessBase Foundations">
+      <meta name="keywords" content="bootstrap, business, creative agency, portfolio, services, ui kit, landing, html5, css3, javascript, gallery, slider, touch, creative">
+      <meta name="author" content="ChessBase Foundations">
+      <!-- Viewport-->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Favicon and Touch Icons-->
+      <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="sssets/img/favicon-16x16.png">
+      <link rel="manifest" href="assets/img/site.webmanifest">
+      <link rel="mask-icon" color="#5bbad5" href="assets/img/safari-pinned-tab.svg">
+      <meta name="msapplication-TileColor" content="#766df4">
+      <meta name="theme-color" content="#ffffff">
+      <!-- Vendor Styles-->
+      <link rel="stylesheet" media="screen" href="assets/vendor/simplebar/dist/simplebar.min.css"/>
+      <link rel="stylesheet" media="screen" href="assets/vendor/tiny-slider/dist/tiny-slider.css"/>
+      <!-- Main Theme Styles + Bootstrap-->
+      <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+      <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+
+      <!-- Vendor Styles-->
+      <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery.js/dist/css/lightgallery.min.css"/>
+      <!-- Main Theme Styles + Bootstrap-->
+      <link rel="stylesheet" media="screen" href="assets/css/dummy/dummy/theme-seo.min.css">
+      <!-- Page loading styles-->
+      <style>
+         .cs-page-loading {
+         position: fixed;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         -webkit-transition: all .4s .2s ease-in-out;
+         transition: all .4s .2s ease-in-out;
+         background-color: #fff;
+         opacity: 0;
+         visibility: hidden;
+         z-index: 9999;
+         }
+         .cs-page-loading.active {
+         opacity: 1;
+         visibility: visible;
+         }
+         .cs-page-loading-inner {
+         position: absolute;
+         top: 50%;
+         left: 0;
+         width: 100%;
+         text-align: center;
+         -webkit-transform: translateY(-50%);
+         transform: translateY(-50%);
+         -webkit-transition: opacity .2s ease-in-out;
+         transition: opacity .2s ease-in-out;
+         opacity: 0;
+         }
+         .cs-page-loading.active > .cs-page-loading-inner {
+         opacity: 1;
+         }
+         .cs-page-loading-inner > span {
+         display: block;
+         font-size: 1rem;
+         font-weight: normal;
+         color: #787a80;
+         }
+         .cs-page-spinner {
+         display: inline-block;
+         width: 2.75rem;
+         height: 2.75rem;
+         margin-bottom: .75rem;
+         vertical-align: text-bottom;
+         background-color: #cfcfd1; 
+         border-radius: 50%;
+         opacity: 0;
+         -webkit-animation: spinner .75s linear infinite;
+         animation: spinner .75s linear infinite;
+         }
+         @-webkit-keyframes spinner {
+         0% {
+         -webkit-transform: scale(0);
+         transform: scale(0);
+         }
+         50% {
+         opacity: 1;
+         -webkit-transform: none;
+         transform: none;
+         }
+         }
+         @keyframes spinner {
+         0% {
+         -webkit-transform: scale(0);
+         transform: scale(0);
+         }
+         50% {
+         opacity: 1;
+         -webkit-transform: none;
+         transform: none;
+         }
+         }
+      </style>
+      <!-- Page loading scripts-->
+      <script>
+
+         var page_number = -1;
+         var page_size = 2;
+         var total_pages = 3;
+
+         html = ['<tr><td>Shik****xena@gmail.com</td><td>Rs 1000</td></tr><tr><td>Siddar****ia@gmail.com</td><td>10000</td></tr>',
+                 '<tr><td>Sama**aina@gmail.com</td><td>Rs 100000</td></tr><tr><td>Vidi**ujrathi@gmail.com</td><td>100000</td></tr>',
+                 '<tr><td>Vishwa**Ananad@gmail.com</td><td>Rs 1000000</td></tr><tr><td>Magnu****arlsen@gmail.com</td><td>Rs 10000000</td></tr>',
+                 ];
+         function prev_page(){
+            page_number = page_number - 1;
+            page_number = Math.max(0, page_number);
+            document.getElementById("donor_table_data").innerHTML = html[page_number];
+            // $.get("http://localhost:8091/api/v1/donors/list/html",
+            //    {
+            //       page_number: page_number,
+            //       page_size: page_size
+            //    },
+            //    function(data, status){
+            //       html = data.response.body.html;
+            //       total_pages = data.response.body.total_pages;
+            //       document.getElementById("donor_table_data").innerHTML = html
+            //    });
+         }
+
+         function next_page(){
+            page_number = Math.min(total_pages-1, page_number + 1);
+            document.getElementById("donor_table_data").innerHTML = html[page_number];
+            // if(page_number<total_pages){
+            //    $.get("http://localhost:8091/api/v1/donors/list/html",
+            //       {
+            //          page_number: page_number,
+            //          page_size: page_size
+            //       },
+            //       function(data, status){
+            //          html = data.response.body.html;
+            //          total_pages = data.response.body.total_pages;
+            //          document.getElementById("donor_table_data").innerHTML = html
+            //       });
+            // }
+            // else{
+            //    page_number = page_number - 1;
+            // }
+         }
+
+
+         (function () {
+           window.onload = function () {
+             var preloader = document.querySelector('.cs-page-loading');
+             preloader.classList.remove('active');
+             next_page();
+             setTimeout(function () {
+               preloader.remove();
+             }, 2000);
+           };
+         })();
+
+      </script>
+   </head>
+   <body>
+      <div class="cs-page-loading active">
+         <div class="cs-page-loading-inner">
+            <div class="cs-page-spinner"></div>
+            <span>Loading...</span>
+         </div>
+      </div>
+      <main class="cs-page-wrapper position-relative">
+      	      <!-- Navbar -->
+      <!-- Navbar -->
+      <!-- Remove .navbar-sticky class to detach .navbar from page scroll -->
+      <header class="cs-header navbar navbar-expand-lg navbar-dark navbar-sticky navbar-floating">
+        <div class="container px-0 px-xl-3">
+          <a class="navbar-brand order-lg-1 mr-lg-5 mr-0 pr-lg-2" href="index.html">
+            <img class="navbar-brand-static" src="assets/img/logo-light.svg" alt="Createx Logo" width="130">
+            <img class="navbar-brand-floating" src="assets/img/logo-dark.svg" alt="Createx Logo" width="130">
+          </a>
+          <a class="navbar-brand order-lg-1 mr-lg-5 mr-0 pr-lg-2" >
+          	                     <a class="btn btn-primary mb-4" href="#monthly-subscription" style="margin-bottom:0 !important;">
+                     Donate</a>
+          </a>
+ </div>
+      </header>
+
+      <!-- <header class="cs-header navbar navbar-expand-md navbar-light navbar-sticky navbar-floating" style="background: #202020;"> -->
+         <!-- <div style="padding:10px 20px;background:#7772f1;color:white;border-radius:2px;">Donate Now</div> -->
+      <!-- </header> -->
+      <section class="d-flex min-vh-100 pt-lg-6 pt-5 bg-dark jarallax" data-jarallax data-speed="0.8" style="min-height: 200px !important;">
+         <div class="container d-flex flex-column justify-content-lg-around justify-content-center py-5" style="background: #202020;">
+            <div class="row">
+               <div>
+                  <div class="col-lg-6 col-md-8 col-sm-10 order-lg-2 order-1 mx-auto mb-lg-0 mb-sm-5 mb-4" style="margin-top:20px;">
+                     <div class="cs-parallax mx-auto">
+                        <div class="cs-parallax-layer" data-depth="0.6"><img src="assets/img/helpchess_logo.png" alt="Layer-5"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-6 col-md-8 col-sm-10 order-lg-1 order-2 mx-auto text-lg-left text-center">
+                  <div style="color:white;font-weight:bold; font-size:20; text-align:center;">Hundreds of players leave the sport every year because of lack of funds for training and playing tournaments.</div>
+                  <br>
+                  <div style="color:#ccd828;font-weight:bold;text-align:center;">Help us Change that.</div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section class="py-lg-6 py-5 bg-secondary bg-size-contain bg-position-top-left" style="padding:0!important;text-align:center;">
+         <iframe  style="padding:5% !important;max-width:1000px;aspect-ratio:1.7;" src="https://www.youtube.com/embed/q7IQexRQV3w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     
+      </section>
+      <!-- Pricing -->
+      <section id="monthly-subscription" class="container mt-md-4 pt-lg-6 pt-5 pb-4">
+         <h2 class="h1 mb-md-5 pb-2 text-center">Make a Donation</h2>
+         <!-- Vertical pricing plan wrapper + Carousel -->
+            <div width="50%" class="justify-content-center" style="max-width: 500px; margin: 0 auto;">
+               <!-- Featured plan card -->
+               <div class="card border-success bg-dark h-100">
+                  <div class="card-img-top text-center pt-4">
+                     <h3 class="mt-3 mb-2 text-white">HelpChess Membership</h3>
+                  </div>
+                  <div class="card-body pt-0">
+                     <div class="display-4 d-flex justify-content-center mb-3 py-2 px-4 text-success">₹  
+                        <span class="cs-price" data-current-price="5000" data-new-price="6000"> 5000</span>
+                        <sup class="lead font-weight-bold mt-4 ml-2">/mon</sup>
+                     </div>
+                     <hr class="hr-gradient hr-light mx-n4 mb-4">
+                     <ul class="list-unstyled d-table mx-auto mb-0 pb-2">
+                        <li class="d-flex align-items-center mb-2">
+                           <i class="cxi-checkmark text-success mr-2"></i>
+                           <span class="text-white">Monthly YouTube Tournament</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-2">
+                           <i class="cxi-checkmark text-success mr-2"></i>
+                           <span class="text-white">Monthly Funds Update</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-2">
+                           <i class="cxi-checkmark text-success mr-2"></i>
+                           <span class="text-white">Telegram Group with our team</span>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="card-footer pt-0 border-0 text-center">
+                     <a class="btn btn-primary mb-4" href="https://rzp.io/i/rNryPlVs" >
+                     Become a Member</a>
+                  </div>
+               </div>
+            </div>
+         <div style="text-align:center;font-weight:bold;padding:10px;margin-top:20px;font-size:20px;">OR</div>
+         <div id="monthly-plan" width="50%" class="justify-content-center" style="max-width: 500px; margin: 0 auto;margin-top: 0px; border:0;">
+         <!-- Featured plan card -->
+         <div class="card  h-100" style="border:0;">
+            <div class="card-img-top text-center pt-4" style="padding:0 !important;">
+               <h3 class="mt-3 mb-2 text-black">Make one-time Donation</h3>
+
+            </div>
+            <br>
+            <div class="card-footer pt-0 border-0 text-center">
+				   <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_HJRa6oOedmREMt" async> </script> </form>
+
+            </div>
+            <h7 style="text-align: center;">For one-time donations more than Rs 5000, you automatically become a HelpChess member for a month.</h7>
+         </div>
+      </section>
+
+      <section style="padding-top: 25px;" class="container mt-md-4 pt-lg-6 pt-5 pb-4">
+         <h2 class="d-flex justify-content-center">Recent Supporters</h2>
+         <!-- Basic table -->
+         <div class="table-responsive" style="text-align: center;">
+           <table class="table table-hover" style="max-width: 500px !important;
+    margin: 0 auto;">
+             <thead class="thead-dark">
+               <tr>
+                 <th>Name</th>
+                 <th>Amount</th>
+               </tr>
+             </thead>
+             <tbody id="donor_table_data">
+             </tbody>
+           </table>
+         </div>
+ 
+         <!-- Pagination: With icons -->
+         <nav class="mb-4" aria-label="Page navigation example" style="    max-width: 500px;
+    margin: 0 auto;">
+           <ul class="pagination mb-0 d-flex justify-content-center">
+             <li class="page-item">
+               <a class="page-link" onclick="prev_page()">
+                 <i class="cxi-arrow-left"></i> Prev
+               </a>
+             </li>
+             <li class="page-item">
+               <a class="page-link" onclick="next_page()">
+                 Next <i class="cxi-arrow-right"></i>
+               </a>
+             </li>
+           </ul>
+         </nav>
+       </section>
+
+       
+      <section style="background: #f4f5f6;">
+       
+            <!-- </div> -->
+         <!-- All controls inside: Dots + Arrows -->
+         <div class="cs-carousel" style="padding:3%;margin:0 auto;max-width: 1000px;">
+            <div class="cs-carousel-inner" data-carousel-options='{
+               "gutter": 15,
+               "loop": false
+               }'>
+               <!-- Carousel item -->
+               <div><a href="https://chessbase.in/news/Super-Heroes-Cup-Day-1-report" target="_blank"><img src="assets/img/4.png" alt="Slider image"></a></div>
+            </div>
+         </div>
+      </section>
+   
+      <!-- Testimonials -->
+      <section class="container pt-lg-6 py-5">
+         <div class="row pt-3 pt-lg-0">
+            <div class="col-md-12" style="max-width:500px;margin:0 auto;">
+               <h3 class="h6 mb-2 text-uppercase">Testimonials</h3>
+               <h2 class="h1 mb-lg-5 mb-4 pb-2">What legends say</h2>
+               <!-- Carousel custom controls -->
+               <div class="tns-custom-controls cs-controls-inverse d-md-flex d-none mb-n5 mx-0" id="tns-custom-controls" tabindex="0">
+                  <button class="mb-n2" type="button" data-controls="prev" tabindex="-1">
+                  <i class="cxi-arrow-left"></i>
+                  </button>
+                  <button class="mb-n2" type="button" data-controls="next" tabindex="-1">
+                  <i class="cxi-arrow-right"></i>
+                  </button>
+               </div>
+               <!-- Carousel -->
+               <div class="cs-carousel cs-nav-outside">
+                  <div class="cs-carousel-inner" data-carousel-options='{
+                     "gutter": 15,
+                     "controlsContainer": "#tns-custom-controls",
+                     "autoHeight": true,
+                     "responsive": {
+                     "0": {
+                     "nav": true
+                     },
+                     "768": {
+                     "nav": false
+                     }
+                     }
+                     }'>
+                     <!-- Carousel testimonial item -->
+                     <blockquote>
+                        <img class="mb-4 rounded-circle" src="assets/img/vishy.png" width="72" alt="Author">
+                        <p>Sagar & Team are doing a tremendous job supporting chess in India. With HelpChess, I hope to see hundreds of young players get over their financial hurdles and make our country proud.</p>
+                        <footer>
+                           <h3 class="h6 mb-0">Vishwanathan Anand</h3>
+                           <span class="font-size-sm text-muted">Formed World No. 1</span>
+                        </footer>
+                     </blockquote>
+                     <!-- Carousel testimonial item -->
+                     <blockquote>
+                        <img class="mb-4 rounded-circle" src="assets/img/yuzi.png" width="72" alt="Author">
+                        <p>I moved on from Chess to Cricket because of lack of financial support in the game. With HelpChess, let's together change this situation in the coming years.</p>
+                        <footer>
+                           <h3 class="h6 mb-0">Yuzvendra Chahal</h3>
+                           <span class="font-size-sm text-muted">Cricketer, Team India</span>
+                        </footer>
+                     </blockquote>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section class="container pb-5 pt-lg-2 mb-3 pb-lg-6">
+       
+         <!-- </div> -->
+      <!-- All controls inside: Dots + Arrows -->
+      <div class="cs-carousel" style="padding:3%;margin:0 auto;max-width: 1000px;">
+         <div class="cs-carousel-inner" data-carousel-options='{
+            "gutter": 15,
+            "loop": false
+            }'>
+            <!-- Carousel item -->
+            <div><a href="https://chessbase.in/news/Super-Heroes-Cup-Day-1-report" target="_blank"><img src="assets/img/brand.png" alt="Slider image"></a></div>
+         </div>
+      </div>
+      </section>
+      
+      
+      <section class="container pb-5 pt-lg-2 mb-3 pb-lg-6">
+         <div class="cs-carousel">
+           <div class="cs-carousel-inner" data-carousel-options='{
+             "nav": false,
+             "controls": false,
+             "autoplay": true,
+             "autoplayTimeout": 4000,
+             "responsive": {
+               "0": {
+                 "items": 2
+               },
+               "576": {
+                 "items": 3
+               },
+               "768": {
+                 "items": 4
+               },
+               "992": {
+                 "items": 5
+               },
+               "1200": {
+                 "items": 6
+               }
+             }
+           }'>
+             <div class="px-3 text-center">
+               <a href="#" class="cs-swap-image">
+                 <img src="assets/img/brands/vans.svg" class="cs-swap-to" width="120" alt="Brand logo hover">
+                 <img src="assets/img/brands/vans-g.svg" class="cs-swap-from" width="120" alt="Brand logo">
+               </a>
+             </div>
+             <div class="px-3 text-center">
+               <a href="#" class="cs-swap-image">
+                 <img src="assets/img/brands/diesel.svg" class="cs-swap-to" width="120" alt="Brand logo hover">
+                 <img src="assets/img/brands/diesel-g.svg" class="cs-swap-from" width="120" alt="Brand logo">
+               </a>
+             </div>
+             <div class="px-3 text-center">
+               <a href="#" class="cs-swap-image">
+                 <img src="assets/img/brands/under-armour.svg" class="cs-swap-to" width="120" alt="Brand logo hover">
+                 <img src="assets/img/brands/under-armour-g.svg" class="cs-swap-from" width="120" alt="Brand logo">
+               </a>
+             </div>
+             <div class="px-3 text-center">
+               <a href="#" class="cs-swap-image">
+                 <img src="assets/img/brands/columbia.svg" class="cs-swap-to" width="120" alt="Brand logo hover">
+                 <img src="assets/img/brands/columbia-g.svg" class="cs-swap-from" width="120" alt="Brand logo">
+               </a>
+             </div>
+             <div class="px-3 text-center">
+               <a href="#" class="cs-swap-image">
+                 <img src="assets/img/brands/levis.svg" class="cs-swap-to" width="120" alt="Brand logo hover">
+                 <img src="assets/img/brands/levis-g.svg" class="cs-swap-from" width="120" alt="Brand logo">
+               </a>
+             </div>
+             <div class="px-3 text-center">
+               <a href="#" class="cs-swap-image">
+                 <img src="assets/img/brands/mango.svg" class="cs-swap-to" width="120" alt="Brand logo hover">
+                 <img src="assets/img/brands/mango-g.svg" class="cs-swap-from" width="120" alt="Brand logo">
+               </a>
+             </div>
+           </div>
+         </div>
+       </section>
+
+      <!-- Footer -->
+      <footer class="cs-footer pt-3 bg-dark">
+         <div class="container py-lg-5 py-4">
+            <div class="row">
+               <div class="col-lg-2 col-md-3 col-12 order-md-1 order-2 mb-md-0 mb-4">
+                  <h3 class="h6 mb-3 text-uppercase text-light">Want to get in touch?</h3>
+                  <ul class="nav nav-light flex-column">
+                     <li class="nav-item mb-2">
+                        <a href="tel:+917304087464" class="nav-link p-0 font-weight-normal">
+                        <span class="text-light">Call: </span>
+                        +91 7304087464
+                        </a>
+                     </li>
+                     <li class="nav-item mb-2">
+                        <a href="mailto:chessbaseindia@gmail.com" class="nav-link p-0 font-weight-normal">
+                        <span class="text-light">Email: </span>
+                        chessbaseindia@gmail.com
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="col-md-3 col-sm-6 order-md-3 order-sm-4 order-3 offset-lg-1 mb-md-0 mb-4">
+                  <h3 class="h6 mb-3 text-uppercase text-light">Follow us</h3>
+                  <a href="https://www.youtube.com/channel/UCIsEhwBMPkRHsEgqYAPQHsA" class="social-btn sb-solid sb-round sb-light mr-2 mb-2 mt-md-0 mt-sm-1">
+                  <i class="cxi-youtube"></i>
+                  </a>
+                  <a href="https://www.facebook.com/chessbaseindia" class="social-btn sb-solid sb-round sb-light mr-2 mb-2 mt-md-0 mt-sm-1">
+                  <i class="cxi-facebook"></i>
+                  </a>
+                  <a href="https://www.instagram.com/chessbaseindia" class="social-btn sb-solid sb-round sb-light mr-2 mb-2 mt-md-0 mt-sm-1">
+                  <i class="cxi-instagram"></i>
+                  </a>
+                  <a href="https://twitter.com/ChessbaseIndia" class="social-btn sb-solid sb-round sb-light mr-2 mb-2 mt-md-0 mt-sm-1">
+                  <i class="cxi-twitter"></i>
+                  </a>
+               </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2 pt-1">
+               <div class="text-light">
+                  <span class="d-block font-size-xs mb-1">
+               </div>
+               <div class="d-flex align-items-end">
+                  <span class="d-sm-inline-block d-none text-light font-size-sm mr-3">Back to top</span>
+                  <a class="btn-scroll-top position-static rounded-circle" href="#top" data-scroll>
+                  <i class="btn-scroll-top-icon cxi-angle-up"></i>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- Vendor scripts: js libraries and plugins-->
+      <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+      <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+      <script src="assets/vendor/lightgallery.js/dist/js/lightgallery.min.js"></script>
+      <script src="assets/vendor/lg-video.js/dist/lg-video.min.js"></script>
+      <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+      <script src="assets/vendor/jarallax/dist/jarallax-element.min.js"></script>
+      <script src="assets/vendor/simplebar/dist/simplebar.min.js"></script>
+      <script src="assets/vendor/tiny-slider/dist/min/tiny-slider.js"></script>
+      <script src="assets/vendor/progressbar.js/dist/progressbar.min.js"></script>
+
+      <!-- Main theme script-->
+      <script src="assets/js/theme.min.js"></script>
+</html>
